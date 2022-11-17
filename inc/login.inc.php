@@ -14,7 +14,7 @@ if(emptyInputLogin($username,$pwd) !== false){
     exit();
 }
 
-loginUsere($conn,$username,$pwd);
+loginUser($conn,$username,$pwd);
 }
 else{
     header("location: ../index.php");
