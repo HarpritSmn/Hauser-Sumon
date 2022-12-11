@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <form method="post" action="login.inc.php">
+            <form method="post" action="inc/login.inc.php">
 
                 <div class="modal-header">
                     <h4 class="modal-title d-flex align-items-center">
@@ -14,8 +14,8 @@
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label for="email" name ="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control shadow-none">
+                        <label for="text" class="form-label">Username</label>
+                        <input type="text" name ="uid" class="form-control shadow-none">
                     </div>
 
                     <div class="mb-4">
@@ -27,11 +27,24 @@
                         <button type="submit" name="submit" class="btn btn-dark shadow-none">Login</button>
                         <a href="javascript: void(0)" class="text-secondary text-decoration-none">Forgot Password?</a>
                     </div>
-                
+
                 </div>
 
-            </form>  
-      
+                <?php
+                        if(isset($_GET["error"])){
+
+                            if($_GET["error"] == "emptyinput"){
+                                echo"<p> Alle Felder ausfüllen</p>";
+                            }
+                            else if($_GET["error"] == "wronglogin"){
+                                echo"<p> Falsche Anmeldedaten</p>";
+                            }
+
+                        }
+                ?>
+
+            </form>
+
         </div>
     </div>
 </div>
@@ -56,7 +69,7 @@
                             <label for="name" class="form-label">Name</label>
                             <input type="text" name="name" class="form-control shadow-none">
                         </div>
-                    
+
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" name="uid" class="form-control shadow-none">
@@ -83,9 +96,36 @@
                         </div>
 
                     </div>
+                    <?php
+                        if(isset($_GET["error"])){
 
+                            if($_GET["error"] == "emptyinput"){
+                                echo"<p> Alle Felder ausfüllen</p>";
+                            }
+                            else if($_GET["error"] == "invaliduid"){
+                                echo"<p> Username vergeben</p>";
+                            }
+                            else if($_GET["error"] == "invalidemail"){
+                                echo"<p> passende E mail angeben</p>";
+                            }
+                            else if($_GET["error"] == "passwordsdontmatch"){
+                                echo"<p>Passwords doesnt match</p>";
+                            }
+                            else if($_GET["error"] == "stmtfailed"){
+                                echo"<p> Etwas ist schief gelaufen, bitte erneut prüfen</p>";
+                            }
+                            else if($_GET["error"] == "usernametaken"){
+                                echo"<p> Username ist bereits vergeben</p>";
+                            }
+                            else if($_GET["error"] == "none"){
+                                echo"<p> Sie Sind registriert!</p>";
+                            }
+                        }
+                ?>
                 </form>
-      
+
+
+
         </div>
     </div>
 </div>

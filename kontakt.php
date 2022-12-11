@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +17,7 @@
 </head>
 <body>
 
+<!-- +++++++++++++++++++++++++++++++++++++++++   Navbar Anfang   +++++++++++++++++++++++++++++++++++++++++  -->
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
@@ -22,37 +27,38 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
+
         <li class="nav-item">
-          <a class="nav-link" href="#">Zimmer</a>
+          <a class="nav-link" href="zimmer.php">Zimmer</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Facilities</a>
-        </li>
-        
         <li class="nav-item">
           <a class="nav-link" href="aboutUs.php">About us</a>
         </li>
       </ul>
       <div class="d-flex" role="search">
-        <!-- <button class="btn btn-outline-success" type="submit">Search</button>-->
-        <button type="button" class="btn btn-outline-dark shadow-none me-lg3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-            Login
-        </button>
-        <button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#registerModal">
-            Registrieren
-        </button>
+      <?php
+                        if(isset($_SESSION["useruid"])){
+                            echo '<button type="button" class="btn btn-outline-dark shadow-none me-lg3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal"> Profil </button>' ;
+                            echo '<button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#registerModal" href="includes/logout.inc.php"> Log out </button>';
+                        }
+                        else{
+                            echo'<button type="button" class="btn btn-outline-dark shadow-none me-lg3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal"> Login </button> ';
+                            echo'<button type="button" class="btn btn-outline-dark shadow-none" data-bs-toggle="modal" data-bs-target="#registerModal"> Registrieren </button>';
+                        }
+                    ?>
 
 </div>
     </div>
   </div>
 </nav>
 
+<!-- +++++++++++++++++++++++++++++++++++++++++   Navbar Ende   +++++++++++++++++++++++++++++++++++++++++  -->
+
 
 <h5 class="m-5">KONTAKTIEREN SIE UNS !!!!!!!!!!!!!!!!!!</h5>
 
-<form class="row g-3 align-items-center m-5">
-    
+<form class="row g-3 align-items-center m-5" action="upload.php" enctype="multipart/form-data" method="post">
+
     <div class="col-12">
         <label for="inputVorname" class="form-label">Vorname</label>
         <input type="text" class="form-control" id="inputVorname" placeholder="Max">
@@ -73,9 +79,12 @@
         <label for="floatingTextarea2">Nachricht</label>
     </div>
 
+    <div class="col">
+      <input type="file" name="fileToUpload" id="fileToUpload" class="form-control " />
+    </div>
 
     <div class="col-12  mb-5">
-        <button type="submit" class="btn btn-primary">Senden</button>
+        <button type="submit" class="btn btn-primary" name="submit">Senden</button>
     </div>
 </form>
 
